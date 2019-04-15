@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from jpark.models import Profile, Category, Parking, Reservation
+from django.http import HttpResponse, HttpResponseRedirect
+from jpark.forms import LoginForm
 
 # Create your views here.
 def home_page(request):
@@ -37,3 +39,23 @@ def edit_profile_view(request):
         form = UserChangeForm()
         args = {'form':form}
         return render(request, 'editprofile.html', args)
+def login_view(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('signup_view')
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password= password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('signup_view')
+            else:
+                form.add_error('username', 'Login failed')
+    else:
+        form = LoginForm()
+
+    context = {'form': form}
+    response = render(request, 'login.html', context)
+    return HttpResponse(response)
