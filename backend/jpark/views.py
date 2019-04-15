@@ -23,7 +23,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            redirect('')
+            return HttpResponseRedirect('/home/')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form':form})
@@ -39,9 +39,10 @@ def edit_profile_view(request):
         form = UserChangeForm()
         args = {'form':form}
         return render(request, 'editprofile.html', args)
+
 def login_view(request):
-    if request.user.is_authenticated:
-        return HttpResponseRedirect('signup_view')
+    # if request.user.is_authenticated:
+    #     return HttpResponseRedirect('/home/')
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -50,7 +51,7 @@ def login_view(request):
             user = authenticate(username=username, password= password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('signup_view')
+                return HttpResponseRedirect('/home/')
             else:
                 form.add_error('username', 'Login failed')
     else:
