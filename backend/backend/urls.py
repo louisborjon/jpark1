@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from jpark.views import signup_view
+from jpark.views import signup_view, home_page, root
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', signup_view, name='signup'),
+    path('home/', home_page, name="home"),
+    path('', root, name="root")
 ]
