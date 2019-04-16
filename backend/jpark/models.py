@@ -42,7 +42,7 @@ class Category(models.Model):
         return self.parking_lots.all()[0].hourly_rate
 
 class Parking(models.Model):
-    CHOICES_IN_SCHOOL_CHOICES = (
+    CHOICES_IN_STREET_TYPES = (
         ('ST', 'Street'),
         ('AVE', 'Avenue'),
         ('BLVD', 'Boulevard'),
@@ -64,16 +64,16 @@ class Parking(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_parking_lots')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='parking_lots')
     drivers = models.ManyToManyField(User, through='Reservation', related_name='reserved_parking_lots')
-    street_type = models.CharField(max_length=4, choices=PROVINCE_CHOICES, default=British Columbia)
+    street_type = models.CharField(max_length=4, choices=PROVINCE_CHOICES, default='BC')
     street_name = models.CharField(max_length=255)
     street_number = models.CharField(max_length=255)
     zip_code = models.CharField(max_length=6)
-    province = models.CharField(max_length=255, choices=choices_in_street_types, default=street)
+    province = models.CharField(max_length=255, choices=CHOICES_IN_STREET_TYPES, default='ST')
     city = models.CharField(max_length=255)
     image = models.URLField(max_length=255, null=True)
     phone = models.CharField(max_length=255)
     description = models.TextField(null=True)
-    reservation_any_time = ToogleField()
+    # reservation_any_time = ToggleField()
     opening_time = models.TimeField()
     closing_time = models.TimeField()
     hourly_rate = models.CharField(max_length=255)
@@ -93,7 +93,7 @@ class Reservation(models.Model):
     # for reservationes starting_date, ending_date, starting_time, ending_time, =total reservation time
     user = models.ForeignKey(User, related_name='reservations_made', on_delete=models.CASCADE)
     parking = models.ForeignKey(Parking, related_name='reservations', on_delete=models.CASCADE)
-    checkout_same_day = ToogleField()
+    # checkout_same_day = ToggleField()
     starting_date = models.DateField()
     ending_date = models.DateField()
     starting_time = models.TimeField()
