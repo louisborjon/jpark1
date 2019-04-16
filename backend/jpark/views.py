@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from jpark.models import Profile, Category, Parking, Reservation
 from django.http import HttpResponse, HttpResponseRedirect
-from jpark.forms import LoginForm
+from jpark.forms import LoginForm, SignupForm
 
 # Create your views here.
 def home_page(request):
@@ -13,10 +13,13 @@ def home_page(request):
 def root(request):
     return render(request, 'home.html')
 
+def mainpage(request):
+    return render(request, 'mainpage.html')
+
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -25,7 +28,7 @@ def signup_view(request):
             login(request, user)
             return HttpResponseRedirect('/home/')
     else:
-        form = UserCreationForm()
+        form = SignupForm()
     return render(request, 'signup.html', {'form':form})
 
 def edit_profile_view(request):
@@ -60,3 +63,8 @@ def login_view(request):
     context = {'form': form}
     response = render(request, 'login.html', context)
     return HttpResponse(response)
+
+
+def profile_view(request):
+    profile = Profile.objects.all()
+    return render(request, 'profile.html')

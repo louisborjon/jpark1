@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from jpark.views import signup_view, login_view, edit_profile_view, root, home_page
+from jpark.views import signup_view, login_view, edit_profile_view, root, home_page,mainpage, profile_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,6 @@ urlpatterns = [
     path('', root, name="root"),
     path('editprofile/', edit_profile_view, name='editprofile'),
     path('login/', login_view, name='login'),
+    path('mainpage/', mainpage, name='mainpage'),
+    path('profile/', profile_view, name="profile"),
 ]
