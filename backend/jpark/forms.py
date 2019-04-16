@@ -13,7 +13,7 @@ class LoginForm(Form):
 class SignupForm(UserCreationForm):
     first_name = forms.CharField(max_length=255)
     last_name = forms.CharField(max_length=255)
-    email = forms.EmailField(max_length=255)
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = User
@@ -23,17 +23,9 @@ class SignupForm(UserCreationForm):
             'last_name',
             'email',
             'password1',
-            'password2',
-            )
+            'password2')
 
 class EditProfileForm(UserChangeForm):
-    first_name = forms.CharField(max_length=255)
-    last_name = forms.CharField(max_length=255)
-    licence_plate = forms.CharField(max_length=255)
-    email = forms.CharField(max_length=255)
-    phone = forms.CharField(max_length=255)
-    #user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    balance = forms.CharField(max_length=255)
 
     class Meta:
         model = User
@@ -41,9 +33,4 @@ class EditProfileForm(UserChangeForm):
         'username',
         'first_name',
         'last_name',
-        'email',
-        'licence_plate',
-        'phone',
-        'balance',
-
-        )
+        'email')

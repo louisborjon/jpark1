@@ -39,9 +39,9 @@ def edit_profile_view(request):
             form.save()
             return redirect('profile') #will redirect to Profile page
     else:
-        form = EditProfileForm()
-        args = {'form':form}
-        return render(request, 'editprofile.html', args)
+        form = EditProfileForm(instance=request.user)
+    args = {'form':form}
+    return render(request, 'editprofile.html', args)
 
 def change_password(request):
     if request.method == 'POST':
