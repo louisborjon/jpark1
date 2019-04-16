@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Hello User</h1>
+
+<h2>Reservations</h2>
+<a href="{% url 'home' %}"><button>Reservations</button></a>
+
+<h2>Profile</h2>
+<a href="{% url 'profile' %}"><button>Profile</button></a>
+
+
+{% endblock %}
