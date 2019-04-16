@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
+from django.contrib import messages
 from jpark.models import Profile, Category, Parking, Reservation
 from django.http import HttpResponse, HttpResponseRedirect
-from jpark.forms import LoginForm, SignupForm
+from jpark.forms import LoginForm, SignupForm, EditProfileForm
 
 # Create your views here.
 def home_page(request):
@@ -33,15 +34,30 @@ def signup_view(request):
 
 def edit_profile_view(request):
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
-
+        form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('') #will redirect to Profile page
+            return redirect('profile') #will redirect to Profile page
     else:
-        form = UserChangeForm()
+        form = EditProfileForm()
         args = {'form':form}
         return render(request, 'editprofile.html', args)
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important to hash passwords
+            messages.success(request, 'Your password was changed successfully!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })
 
 def login_view(request):
     # if request.user.is_authenticated:
