@@ -67,4 +67,10 @@ def login_view(request):
 
 def profile_view(request):
     profile = Profile.objects.all()
-    return render(request, 'profile.html')
+    reservation = Reservation.objects.all()
+    context = {
+        'profiles': profile,
+        'reservations':reservation
+        }
+
+    return render(request, 'profile.html', context)
