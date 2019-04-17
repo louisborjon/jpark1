@@ -11,19 +11,21 @@ class LoginForm(Form):
 
 
 class SignupForm(UserCreationForm):
-    first_name = forms.CharField(max_length=255)
-    last_name = forms.CharField(max_length=255)
-    email = forms.EmailField(required=True)
-
+    first_name = CharField(max_length=244)
+    last_name = CharField(max_length=244)
+    
     class Meta:
         model = User
         fields = (
-            'username',
             'first_name',
             'last_name',
-            'email',
-            'password1',
-            'password2')
+            'username', 
+            'email'
+            )
+    
+    
+    #def __str__(self):
+        #return self.first_name
 
 class EditProfileForm(UserChangeForm):
 

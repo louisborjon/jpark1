@@ -1,14 +1,17 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 class Profile(models.Model):
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     licence_plate = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
     phone = models.CharField(max_length=255, null=True)
-    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     balance = models.CharField(max_length=255)
 
 
@@ -21,6 +24,15 @@ class Profile(models.Model):
     @classmethod
     def exists_for_user(self, user):
         return Profile.objects.filter(user_id=user.id).exists()
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance, first_name=instance.first_name, last_name=instance.last_name, email=instance.email)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
 
 
 class Category(models.Model):
@@ -91,7 +103,7 @@ class Parking(models.Model):
 
 class Reservation(models.Model):
     # for reservationes starting_date, ending_date, starting_time, ending_time, =total reservation time
-    user = models.ForeignKey(User, related_name='reservations_made', on_delete=models.CASCADE)
+    Profile = models.ForeignKey(User, related_name='reservations_made', on_delete=models.CASCADE)
     parking = models.ForeignKey(Parking, related_name='reservations', on_delete=models.CASCADE)
     # checkout_same_day = ToggleField()
     starting_date = models.DateField()

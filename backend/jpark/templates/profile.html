@@ -2,10 +2,10 @@
 
 {% block content %}
 
-{% for profile in profiles %}
-<h2>Hello {{ profile.first_name }} {{ profile.last_name }}</h2>
-    <h3>Your Currnet Balance is: {{ profile.balance }}</h3>
+<h2>Hello {{ user.username }}</h2>
+    <h3>Your Currnet Balance is: {{ profile.balance  }}</h3>
     <a href="{% url 'editprofile' %}"><button>Edit Your Profile</button></a>
+    <a href="{% url 'reservations'%}"><button>Make Reservations</button></a>
+    <a href="{% url 'mainpage'%}"><button>Home</button></a>
     <!---<h2>Status: {{ profile.user }}</h2>-->
-{% endfor %}
 {% endblock %}
