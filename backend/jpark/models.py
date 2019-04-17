@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from djmoney.models.fields import MoneyField
 from django.db import models
 from django.db.models import Sum
 
@@ -9,7 +10,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=255)
     phone = models.CharField(max_length=255, null=True)
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    balance = models.IntegerField(null=True)
+    balance = MoneyField(max_digits=14, decimal_places=2, default_currency='CAD')
 
 
     def __str__(self):
@@ -26,28 +27,29 @@ class Profile(models.Model):
 class Category(models.Model):
     """ Category respresenting zone price """
     zone_in_category_choices = (
-        ('zone_1', 'Z1'),
-        ('zone_2', 'Z2'),
-        ('zone_3', 'Z3'),
+        ('5','zone_1'),
+        ('3', 'zone_2'),
+        ('1', 'zone_3'),
     );
-    zone_pricing = (
-        ('zone_1', '5'),
-        ('zone_2', '3'),
-        ('zone_3', '1'),
-    );
-    zone_name = models.CharField(max_length=2, choices=zone_in_category_choices, default='zone_1')
-    zone_price = models.IntegerField(choices=zone_pricing)
+    # we dont need this for now (April 17,2019)
+    # zone_pricing = (
+    #     ('zone_1', '5'),
+    #     ('zone_2', '3'),
+    #     ('zone_3', '1'),
+    # );
+    zone_price = MoneyField(choices=zone_in_category_choices, max_digits=14, decimal_places=2)
+    # zone_price = models.IntegerField(choices=zone_pricing)
 
 
     def __str__(self):
-        return self.zone_price
+        return "Your hourly rate will be {}.".format(self.zone_price)
 
     def location(self):
         return self.parking_lots.all()[0].hourly_rate
 
 class Parking(models.Model):
     CHOICES_IN_STREET_TYPES = (
-        ('ST', 'Street'),
+        ('Street', 'ST'),
         ('AVE', 'Avenue'),
         ('BLVD', 'Boulevard'),
         ('RD', 'Road'),
@@ -104,8 +106,12 @@ class Reservation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     notes = models.TextField(blank=True)
 
-    def __str__(self):
-        return "Your reservation is on {} - Total Time {}".format(self.starting_date, (self.ending_time - self.starting_time).hours)
+
+    #def __str__(self):
+        #return "Your reservation is on {}".format(self.total_time).hour
+
+        #return "Your remaining balance will be {}".format(self.user.profile.balance -(self.ending_time - self.starting_time) * self.parking.category.zone_price)
+
 
     def date_and_time(self):
         date = self.date.strftime("%Y-%m-%d")
