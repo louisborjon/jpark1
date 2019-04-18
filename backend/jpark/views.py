@@ -101,3 +101,11 @@ def profile_view(request, id):
         }
 
     return render(request, 'profile.html', context)
+
+def list_view(request):
+    return render(request, 'list.html')
+
+def delete_parking(request, id):
+    Parking = Parking.objects.get(pk=id)
+    Parking.delete()
+    return render(request, 'home.html')
