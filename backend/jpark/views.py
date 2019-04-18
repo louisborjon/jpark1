@@ -11,7 +11,7 @@ from django.urls import reverse
 
 
 # Create your views here.
-def home_page(request):
+def starting_page(request):
     return render(request, 'home.html')
 
 def root(request):
@@ -23,6 +23,12 @@ def reservations(request):
 def mainpage(request):
     return render(request, 'mainpage.html')
 
+def search(request):
+    return render(request, 'search.html')
+    
+def about_us_view(request):
+    return render(request, 'about_us.html')
+
 
 def signup_view(request):
     if request.method == 'POST':
@@ -33,7 +39,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('/home/')
+            return redirect('/mainpage/')
     else:
         form = SignupForm()
     return render(request, 'signup.html', {'form':form})
