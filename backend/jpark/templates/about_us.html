@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<title>About Us</title>
+<h1>About Us</h1>
+{% if user.is_authenticated %}
+    <a href="{% url 'profile' id=user.profile.pk %}">Return To Profile</a>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+{% endblock %}
