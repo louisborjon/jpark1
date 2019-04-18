@@ -6,16 +6,21 @@
 
 <a href="{% url 'logout' %}"><button>Logout</button></a>
 
-<h2>Reservations</h2>
-<a href="{% url 'reservations' %}"><button>Reservations</button></a>
+<h2>Reserve</h2>
+<a href="{% url 'reservations' %}"><button>Reserve A Spot</button></a>
 
 <h2>Profile Page</h2>
 
 <a href="{% url 'profile' id=user.profile.pk %}"><button>Profile</button></a>
+
+<h2>Search</h2>
+<a href="{% url 'search' %}"><button>Search</button></a>
+
 {% else %}
 <div>
-    <h2>You are not signed in</h2>
+    <h2>You are not signed in. Please login or sign up</h2>
     <a href="{% url 'login' %}"><button>Sign In</button></a>
+    <a href="{% url 'signup' %}"><button>Sign Up</button></a> 
 </div>
 {% endif %}
 {% endblock %}

@@ -15,20 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from jpark.views import signup_view, login_view, edit_profile_view, root, home_page,mainpage, profile_view, change_password,user_logout,reservations
+from jpark.views import signup_view, login_view, edit_profile_view, root, starting_page,mainpage, profile_view, change_password,user_logout,reservations,search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', signup_view, name='signup'),
-    path('home/ ', home_page, name="home"),
+    path('home/ ', starting_page, name="home"),
     path('', root, name="root"),
 
     path('editprofile/', edit_profile_view, name='editprofile'),
     path('login/', login_view, name='login'),
     path('mainpage/', mainpage, name='mainpage'),
+    path('search/', search, name='search'),
 
     path('profile/<int:id>', profile_view, name="profile"),
     path('password/', change_password, name='change_password'),
     path('logout/', user_logout, name='logout'),
     path('reservations/', reservations, name='reservations')
+
 ]
