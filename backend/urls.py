@@ -14,12 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from jpark.views import signup_view, login_view, edit_profile_view, root, starting_page,mainpage, profile_view, change_password, user_logout, reservations, search, about_us_view, list_view
+from rest_framework import routers
+from jpark import views
+
+router = routers.DefaultRouter()
+router.register(r'profile', views.ProfileView, 'profile'),
+router.register(r'category', views.CategoryView, 'category'),
+router.register(r'parking', views.ParkingView, 'parking'),
+router.register(r'reservation', views.ReservationView, 'reservation'),
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('signup/', signup_view, name='signup'),
     path('home/ ', starting_page, name="home"),
     path('', root, name="root"),
@@ -34,6 +43,5 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('reservations/', reservations, name='reservations'),
     path('list/', list_view, name="list"),
-    path('about_us/', about_us_view, name ='about_us')
-
+    path('about_us/', about_us_view, name ='about_us'),
 ]

@@ -8,7 +8,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from jpark.forms import LoginForm, SignupForm, EditProfileForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from rest_framework import viewsets
+from .serializers import ProfileSerializer, CategorySerializer, ParkingSerializer, ReservationSerializer
+from .models import Profile, Category, Parking, Reservation
 
+class ProfileView(viewsets.ModelViewSet):
+  serializer_class = ProfileSerializer
+  queryset = Profile.objects.all()
+
+class CategoryView(viewsets.ModelViewSet):
+  serializer_class = CategorySerializer
+  queryset = Category.objects.all()
+
+class ParkingView(viewsets.ModelViewSet):
+  serializer_class = ParkingSerializer
+  queryset = Parking.objects.all()
+
+class ReservationView(viewsets.ModelViewSet):
+  serializer_class = ReservationSerializer
+  queryset = Reservation.objects.all()
 
 # Create your views here.
 def starting_page(request):
@@ -25,7 +43,7 @@ def mainpage(request):
 
 def search(request):
     return render(request, 'search.html')
-    
+
 def about_us_view(request):
     return render(request, 'about_us.html')
 
