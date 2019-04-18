@@ -25,6 +25,10 @@ def mainpage(request):
 
 def search(request):
     return render(request, 'search.html')
+    
+def about_us_view(request):
+    return render(request, 'about_us.html')
+
 
 def signup_view(request):
     if request.method == 'POST':
