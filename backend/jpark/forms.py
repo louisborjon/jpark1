@@ -36,3 +36,6 @@ class EditProfileForm(UserChangeForm):
         'first_name',
         'last_name',
         'email')
+
+class ListForm(Form):
+    pass
