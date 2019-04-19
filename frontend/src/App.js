@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 
 class App extends Component {
   state = {
-    profil:[]
+    profile:[]
   };
   async componentDidMount() {
     try {
       const res = await fetch('http://127.0.0.1:8000/api/');
-      const profil = await res.json();
+      const profile = await res.json();
       this.setState({
-        profil
+        profile
       });
     } catch (e) {
       console.log(e);
@@ -19,10 +19,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.profil.map(item => (
+        {this.state.profile.map(item => (
           <div key={item.id}>
-            <h1>{item.title}</h1>
-            <span>{item.description}</span>
+            <h1>{item.user}</h1>
+            // fields = ('user', 'first_name', 'last_name ', 'licence_plate', 'email', 'phone', 'balance')
+            <span>{item.first_name}</span>
           </div>
         ))}
       </div>
