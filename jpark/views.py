@@ -47,6 +47,12 @@ def search(request):
 def about_us_view(request):
     return render(request, 'about_us.html')
 
+def add(request):
+    return render(request, 'addspot.html')
+
+def delete(request):
+    return render(request, 'deletespot.html')
+
 
 def signup_view(request):
     if request.method == 'POST':

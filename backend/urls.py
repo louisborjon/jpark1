@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from jpark.views import signup_view, login_view, edit_profile_view, root, starting_page,mainpage, profile_view, change_password, user_logout, reservations, search, about_us_view, list_view
+from jpark.views import add, delete 
 from rest_framework import routers
 from jpark import views
 
@@ -37,6 +38,8 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('mainpage/', mainpage, name='mainpage'),
     path('search/', search, name='search'),
+    path('deletespot/', delete, name='delete'),
+    path('addspot/', add, name='add'),
 
     path('profile/<int:id>', profile_view, name="profile"),
     path('password/', change_password, name='change_password'),
