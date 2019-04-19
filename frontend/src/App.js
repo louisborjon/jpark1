@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 
 class App extends Component {
   state = {
-    profiles:[]
+    profil:[]
   };
   async componentDidMount() {
     try {
       const res = await fetch('http://127.0.0.1:8000/api/');
-      const profiles = await res.json();
+      const profil = await res.json();
       this.setState({
-        profiles
+        profil
       });
     } catch (e) {
       console.log(e);
@@ -19,7 +19,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.profiles.map(item => (
+        {this.state.profil.map(item => (
           <div key={item.id}>
             <h1>{item.title}</h1>
             <span>{item.description}</span>
