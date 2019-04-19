@@ -4,10 +4,8 @@
 {% if user.is_authenticated %}
 <h1> List for Parking </h1>
 
-<form action="{% url 'list' %}" method="post">
-    {% csrf_token %}
-    <button type="submit" name="button">Delete Product</button>
-    </form> 
+<a href="{% url 'add'%}"><button> Add Parking Spot</button></a>
+<a href="{% url 'delete'%}"><button> Delete Parking Spot</button></a>
     {%endif%}
 
     {% endblock %}
