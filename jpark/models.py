@@ -14,7 +14,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=255)
     phone = models.CharField(max_length=255, null=True)
     balance = MoneyField(max_digits=14, decimal_places=2, default_currency='CAD')
-
+    completed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.full_name()
