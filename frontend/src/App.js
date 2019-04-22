@@ -20,7 +20,7 @@ class App extends Component {
  }
  refreshList = () => {
    axios
-     .get("/api/todos/")
+     .get("/api/profiles/")
      .then(res => this.setState({ profileList: res.data }))
      .catch(err => console.log(err));
  };
@@ -91,17 +91,17 @@ class App extends Component {
    this.toggle();
    if (item.id) {
      axios
-       .put(`/api/todos/${item.id}/`, item)
+       .put(`/api/profiles/${item.id}/`, item)
        .then(res => this.refreshList());
      return;
    }
    axios
-     .post("/api/todos//", item)
+     .post("/api/profiles//", item)
      .then(res => this.refreshList());
  };
  handleDelete = item => {
    axios
-     .delete(`/api/todos//${item.id}`)
+     .delete(`/api/profiles//${item.id}`)
      .then(res => this.refreshList());
  };
  createItem = () => {

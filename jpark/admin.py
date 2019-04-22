@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Parking, Reservation, Category,
+from .models import Profile, Parking, Reservation, Category
 
 class ProfileAdmin(admin.ModelAdmin):  # add this
   list_display = ('user', 'first_name', 'completed')

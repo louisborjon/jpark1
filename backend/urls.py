@@ -20,14 +20,15 @@ from rest_framework import routers
 from jpark import views
 
 router = routers.DefaultRouter()
-router.register(r'todos', views.ProfileView, 'jpark')
+router.register(r'profiles', views.ProfileView, 'jpark')
 # router.register(r'todos', views.CategoryView, 'jpark'),
 # router.register(r'todos', views.ParkingView, 'jpark'),
 # router.register(r'todos', views.ReservationView, 'jpark'),
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),   path('api/', include(router.urls)),
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('signup/', signup_view, name='signup'),
     path('home/ ', starting_page, name="home"),
     path('', root, name="root"),
