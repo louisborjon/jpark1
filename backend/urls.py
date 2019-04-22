@@ -20,7 +20,7 @@ from rest_framework import routers
 from jpark import views
 
 router = routers.DefaultRouter()
-router.register(r'profiles', views.ProfileView, 'jpark')
+router.register(r'todos', views.ProfileView, 'jpark')
 # router.register(r'todos', views.CategoryView, 'jpark'),
 # router.register(r'todos', views.ParkingView, 'jpark'),
 # router.register(r'todos', views.ReservationView, 'jpark'),
