@@ -4,7 +4,7 @@ from .models import Category, Parking, Reservation, CustomUser
 class ProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = CustomUser
-    fields = ('user', 'first_name', 'last_name ', 'licence_plate', 'email', 'phone', 'balance')
+    fields = ('id', 'first_name', 'last_name ', 'licence_plate', 'email', 'phone', 'balance')
 
 class CategorySerializer(serializers.ModelSerializer):
   class Meta:
