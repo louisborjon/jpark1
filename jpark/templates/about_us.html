@@ -1,19 +1,26 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 <title>About Us</title>
-<h1>About Us</h1>
-<h4> Welcome to Jpark! We help drivers find the closest parking spots from their intended destination. We also help people turn their empty parking 
-    spots into a profitable service. We know that parking in the city is never easy so we made Jpark to help remove all that stress and make parking
-    in the city a more simple process.
-</h4>
-<img src="https://www.gannett-cdn.com/-mm-/7659ac79c96d7139fdfd8df865ccf757ae799207/c=327-0-5505-3893/local/-/media/2017/09/11/USATODAY/USATODAY/636407500078372922-GettyImages-658610224.jpg?width=534&height=401&fit=crop" alt="">
-
-
+<h1 class="aboutus-title">About Us</h1>
 {% if user.is_authenticated %}
-    <a href="{% url 'profile' id=user.profile.pk %}">Return To Profile</a>
+    <a class="button" href="{% url 'profile' id=user.profile.pk %}">Return To Profile</a>
 {% else %}
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'signup' %}">Sign Up</a>
+<div id="wrapper">
+<div id="left">
+    <a class="button" href="{% url 'login' %}">Login</a>
+    <a class="button" href="{% url 'signup' %}">Sign Up</a>
+</div>
+</div>
+<p class="aboutus-paragraph">Just Park was created using a mixture of black magic, blood, sweat and tears. Each of them used the knowledge
+  they gained from Bitmaker's Web Development Immersive Program to bring this beautiful little webthang to your eyes today.</p>
+<p class="aboutus-paragraph">Presenting... 'Just Park!' A webapp that lets you rent peoples' parking spots at your convenience and fixed
+  prices! We make sure no one can overcharge you as well!. We put the customer first while looking out for their parking needs.
+  So what are you waiting for? Sign up with us and lets get this parking party started!</p>
+
+<img class="parking-photo" src="{% static '/images/happy_parking-1024x683.jpg' %}" alt="">
+<p class="creator-riff"> The Creators - Josh Date, Luis Borjon, Michael Forgione and Vithuyan Sivananthan.</p>
 {% endif %}
 {% endblock %}
