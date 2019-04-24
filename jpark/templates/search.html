@@ -24,23 +24,23 @@
             zoom: 9,
         });
 
-        
-
-
         axios.get('/api/parking/')
             .then(function (response) {
                 let parking_spots = response.data
 
                 parking_spots.forEach(function(parking_spot) {
+
                     // create a DOM element for the marker
                     var el = document.createElement('div');
                     el.className = 'marker';
-                    el.style.backgroundImage = 'url(https://placekitten.com/g/20/)';
 
+                    // TODO: Map this to a plain marker?
+                    el.style.backgroundImage = 'url(https://placekitten.com/g/20/)';
                     el.style.width = '20px';
                     el.style.height = '20px';
                     
                     el.addEventListener('click', function() {
+                        // TODO: Make this trigger something else in our UI
                         window.alert(parking_spot.description);
                     });
                     
@@ -49,9 +49,6 @@
                         .setLngLat([parking_spot.lat, parking_spot.lng])
                         .addTo(map);
                 });
-
-
-                console.log("Parking Spots: ", response);
             })
             .catch(function (error) {
                 // handle error
