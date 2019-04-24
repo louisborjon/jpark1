@@ -4,7 +4,9 @@ from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from mapbox import Geocoder
 
+geocoder = Geocoder(access_token="sk.eyJ1Ijoidml0aHV5YW4iLCJhIjoiY2p1dWI0b2ZtMDVkeDN5bXF5dmR5NWlzNyJ9.XytADzlzPvLuSXPI5vroJw")
 
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
@@ -95,6 +97,18 @@ class Parking(models.Model):
     opening_time = models.TimeField()
     closing_time = models.TimeField()
     hourly_rate = models.IntegerField()
+    lat = models.DecimalField()
+    lng = models.DecimalField()
+
+    @receiver(post_save, sender=Parking)
+    def geo_from_address(sender, instance, created, **kwargs):
+        if created:
+            address = f"{instance.street_number} {instance.street_name}, {instance.city}, {instance.zip_code}"
+            response = geocoder.forward(address)
+            instance.lat = response["features"][0]["center"][0]
+            instance.lng = response["features"][0]["center"][1]
+            instance.save()
+
 
     def __str__(self):
         return "Your parking spot is located at {} {} {}".format(self.street_number, self.street_name, self.street_type)
