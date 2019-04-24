@@ -2,7 +2,67 @@
 
 {% block content %}
 
-<h2>Search</h2>
+<!DOCTYPE html>
+<html>
+ <head>
+    <title>Interactive maps for Django web apps</title>
+    <script src='https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+  </head>
+  <body>
+   <h1>Search</h1>
+   <div id='map' style='width: 1000px; height: 1000px;'></div>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        mapboxgl.accessToken = 'pk.eyJ1Ijoidml0aHV5YW4iLCJhIjoiY2p1bXRlcXV2MmxkeDN5cGpxOXp5N2R5dyJ9.EaWfMJm7NMV-71h9r0LF2w';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-79.38, 43.65],
+            zoom: 9,
+        });
+
+        axios.get('/api/parking/')
+            .then(function (response) {
+                let parking_spots = response.data
+
+                parking_spots.forEach(function(parking_spot) {
+
+                    // create a DOM element for the marker
+                    var el = document.createElement('div');
+                    el.className = 'marker';
+
+                    // TODO: Map this to a plain marker?
+                    el.style.backgroundImage = 'url(https://placekitten.com/g/20/)';
+                    el.style.width = '20px';
+                    el.style.height = '20px';
+                    
+                    el.addEventListener('click', function() {
+                        // TODO: Make this trigger something else in our UI
+                        window.alert(parking_spot.description);
+                    });
+                    
+                    // add marker to map
+                    new mapboxgl.Marker(el)
+                        .setLngLat([parking_spot.lat, parking_spot.lng])
+                        .addTo(map);
+                });
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+
+       
+
+    </script>
+  </body>
+</html>
 
 
 {% endblock %}

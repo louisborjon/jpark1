@@ -28,8 +28,8 @@ from .forms import CustomUserCreationForm
 
 
 class ProfileView(viewsets.ModelViewSet):
-  serializer_class = ProfileSerializer
-  queryset = CustomUser.objects.all()
+    serializer_class = ProfileSerializer
+    queryset = CustomUser.objects.all()
 
 #
 # class CategoryView(viewsets.ModelViewSet):
@@ -212,3 +212,6 @@ def delete(request):
     return render(request, 'deletespot.html')
 
 #make validation to check for plate number and phone number fields. if they don't prompt them to add those fields in order to add parking spot.
+def default_map(request):
+    mapbox_access_token = 'pk.my_mapbox_access_token'
+    return render(request, 'default.html', { 'mapbox_access_token': mapbox_access_token })   
