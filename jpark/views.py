@@ -83,7 +83,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('/profileinfo/')
+            return redirect('/mainpage/')
     else:
         form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form':form})
@@ -92,12 +92,6 @@ def signup_view(request):
           #  license_plate = form.cleaned_data.get('license_plate')
            # phone_number = form.cleaned_data.get('phone_number')
         #profile_form = ProfileForm(request.POST)
-
-
-#Profile Info Form
-def ProfileInfo_view(request):
-    return render(request, 'profileinfo.html')
-
 
 
 
