@@ -31,17 +31,18 @@ class ProfileView(viewsets.ModelViewSet):
   serializer_class = ProfileSerializer
   queryset = CustomUser.objects.all()
 
-class CategoryView(viewsets.ModelViewSet):
-  serializer_class = CategorySerializer
-  queryset = Category.objects.all()
-
-class ParkingView(viewsets.ModelViewSet):
-  serializer_class = ParkingSerializer
-  queryset = Parking.objects.all()
-
-class ReservationView(viewsets.ModelViewSet):
-  serializer_class = ReservationSerializer
-  queryset = Reservation.objects.all()
+#
+# class CategoryView(viewsets.ModelViewSet):
+#   serializer_class = CategorySerializer
+#   queryset = Category.objects.all()
+#
+# class ParkingView(viewsets.ModelViewSet):
+#   serializer_class = ParkingSerializer
+#   queryset = Parking.objects.all()
+#
+# class ReservationView(viewsets.ModelViewSet):
+#   serializer_class = ReservationSerializer
+#   queryset = Reservation.objects.all()
 
 # Create your views here.
 def starting_page(request):

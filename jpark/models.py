@@ -80,6 +80,18 @@ class Parking(models.Model):
     opening_time = models.TimeField()
     closing_time = models.TimeField()
     hourly_rate = models.IntegerField()
+    # lat = models.DecimalField()
+    # lng = models.DecimalField()
+
+    # @receiver(post_save, sender=Parking)
+    # def geo_from_address(sender, instance, created, **kwargs):
+    #     if created:
+    #         address = f"{instance.street_number} {instance.street_name}, {instance.city}, {instance.zip_code}"
+    #         response = geocoder.forward(address)
+    #         instance.lat = response["features"][0]["center"][0]
+    #         instance.lng = response["features"][0]["center"][1]
+    #         instance.save()
+
 
     class Meta():
         permissions = (("can_edit_parking", "User Can edit Parking"),) 

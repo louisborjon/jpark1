@@ -21,10 +21,10 @@ from rest_framework import routers
 from jpark import views
 
 router = routers.DefaultRouter()
-router.register(r'profile', views.ProfileView, 'profile'),
-router.register(r'category', views.CategoryView, 'category'),
-router.register(r'parking', views.ParkingView, 'parking'),
-router.register(r'reservation', views.ReservationView, 'reservation'),
+router.register(r'todos', views.ProfileView, 'jpark')
+# router.register(r'todos', views.CategoryView, 'jpark'),
+# router.register(r'todos', views.ParkingView, 'jpark'),
+# router.register(r'todos', views.ReservationView, 'jpark'),
 
 
 urlpatterns = [

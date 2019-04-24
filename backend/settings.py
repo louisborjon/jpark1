@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'jpark.CustomUser' 
 
 
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +61,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+)
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -131,7 +141,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# we whitelist localhost:3000 because that's where frontend will be served
 CORS_ORIGIN_WHITELIST = (
      'localhost:3000/'
  )
