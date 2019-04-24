@@ -1,8 +1,6 @@
-{% extends 'base.html' %}
-
 {% block content %}
-<title>Jpark Sign Up</title>
-<h2> Sign Up!</h2>
+<title>Jpark Sign Up Profile Info</title>
+<h2> Thanks For Signing Up! Please Add Your Phone Number And License Plate</h2>
 <form method="POST">
     {% csrf_token %}
     {% for field in form %}
@@ -14,6 +12,7 @@
         {% endif %}
     {% endfor %}
     </p>
+    
     <button type="submit">Sign Up</button>
 </form>
 {% endblock %}

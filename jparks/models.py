@@ -4,36 +4,21 @@ from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import Permission , Group
+from django.contrib.auth.models import AbstractUser
 
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    licence_plate = models.CharField(max_length=255, null=True)
-    email = models.EmailField(max_length=255)
-    phone = models.CharField(max_length=255, null=True)
+class CustomUser(AbstractUser):
+    license_plate = models.CharField(max_length=255, null=True)
+    phone_number = models.CharField(max_length=255, null=True)
     balance = MoneyField(max_digits=14, decimal_places=2, default_currency='CAD')
-
+    #complete = models.BooleanField()
 
     def __str__(self):
-        return self.full_name()
-
-    def full_name(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        return self.username
 
     @classmethod
     def exists_for_user(self, user):
-        return Profile.objects.filter(user_id=user.id).exists()
-
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance, first_name=instance.first_name, last_name=instance.last_name, email=instance.email)
-
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+        return CustomUser.objects.filter(user_id=user.id).exists()
 
 
 class Category(models.Model):
@@ -61,7 +46,7 @@ class Category(models.Model):
 
 class Parking(models.Model):
     CHOICES_IN_STREET_TYPES = (
-        ('Street', 'ST'),
+        ('ST', 'Street'),
         ('AVE', 'Avenue'),
         ('BLVD', 'Boulevard'),
         ('RD', 'Road'),
@@ -80,9 +65,9 @@ class Parking(models.Model):
         ('SK', 'Saskatchewan'),
         ('YT', 'Yukon'),
     );
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_parking_lots')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='parking_lots')
-    drivers = models.ManyToManyField(User, through='Reservation', related_name='reserved_parking_lots')
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='owned_parking_lots')
+    #category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='parking_lots')
+    drivers = models.ManyToManyField(CustomUser, through='Reservation', related_name='reserved_parking_lots')
     street_type = models.CharField(max_length=4, choices=CHOICES_IN_STREET_TYPES, default='ST')
     street_name = models.CharField(max_length=255)
     street_number = models.IntegerField()
@@ -96,6 +81,9 @@ class Parking(models.Model):
     closing_time = models.TimeField()
     hourly_rate = models.IntegerField()
 
+    class Meta():
+        permissions = (("can_edit_parking", "User Can edit Parking"),) 
+
     def __str__(self):
         return "Your parking spot is located at {} {} {}".format(self.street_number, self.street_name, self.street_type)
     # def parking_past_midnight(self):
@@ -106,9 +94,12 @@ class Parking(models.Model):
         reserved_parking = reserved_parking['reserved_time__sum'] or 0 #trying to not allow two reservations overlapping
         return (reserved_parking + starting_time) <= self.availability
 
+class Owner(models.Model):
+    pass    
+
 class Reservation(models.Model):
     # for reservationes starting_date, ending_date, starting_time, ending_time, =total reservation time
-    Profile = models.ForeignKey(User, related_name='reservations_made', on_delete=models.CASCADE)
+    User = models.ForeignKey(CustomUser, related_name='reservations_made', on_delete=models.CASCADE)
     parking = models.ForeignKey(Parking, related_name='reservations', on_delete=models.CASCADE)
     # checkout_same_day = ToggleField()
     starting_date = models.DateField()

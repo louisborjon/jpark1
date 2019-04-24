@@ -11,12 +11,13 @@
 
 <h2>Profile Page</h2>
 
-<a href="{% url 'profile' id=user.profile.pk %}"><button>Profile</button></a>
+<a href="{% url 'profile' id=user.pk %}"><button>Profile</button></a>
 
 <h2>Search</h2>
 <a href="{% url 'search' %}"><button>Search</button></a>
 
-<h2>Add/Delete A Spot</h2>
+<h2>Parking Spot Listing</h2>
+
 <a href="{% url 'list'%}"><button>Parking</button></a>
 
 {% else %}

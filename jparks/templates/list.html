@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h1> List for Parking </h1>
+    <a href="{% url 'add'%}"><button> Add Parking Spot</button></a>
+    <!---{% if perms.jpark.can_edit_parking %}-->
+        <a href="{% url 'add'%}"><button> Add Parking Spot</button></a>
+    <!---{% else %}
+        <h2>You Are Not An Owner. You Do Not Have Access!</h2>
+    {% endif %}
+{% endif %}-->
+{% endblock %}

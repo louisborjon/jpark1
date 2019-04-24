@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from jpark.views import signup_view, login_view, edit_profile_view, root, starting_page,mainpage, profile_view, change_password, user_logout, reservations, search, about_us_view, list_view
-from jpark.views import add, delete 
+from jparks.views import signup_view, login_view, edit_profile_view, root, starting_page,mainpage, profile_view, change_password, user_logout, reservations, search, about_us_view, list_view, ProfileInfo_view
+from jparks.views import add, delete 
 from rest_framework import routers
-from jpark import views
+from jparks import views
 
 router = routers.DefaultRouter()
 router.register(r'profile', views.ProfileView, 'profile'),
@@ -38,7 +38,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('mainpage/', mainpage, name='mainpage'),
     path('search/', search, name='search'),
-    path('deletespot/', delete, name='delete'),
+    path('deletespot', delete, name='delete'),
     path('addspot/', add, name='add'),
 
     path('profile/<int:id>', profile_view, name="profile"),
@@ -47,4 +47,5 @@ urlpatterns = [
     path('reservations/', reservations, name='reservations'),
     path('list/', list_view, name="list"),
     path('about_us/', about_us_view, name ='about_us'),
+    path('profileinfo/', ProfileInfo_view, name='ProfileInfo')
 ]
