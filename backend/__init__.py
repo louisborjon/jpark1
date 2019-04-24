@@ -1,1 +1,1 @@
-default_app_config = 'jparks.apps.JparkConfig'
+default_app_config = 'jpark.apps.JparkConfig'

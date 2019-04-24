@@ -95,13 +95,13 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('notes', models.TextField(blank=True)),
                 ('User', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reservations_made', to=settings.AUTH_USER_MODEL)),
-                ('parking', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reservations', to='jparks.Parking')),
+                ('parking', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reservations', to='jpark.Parking')),
             ],
         ),
         migrations.AddField(
             model_name='parking',
             name='drivers',
-            field=models.ManyToManyField(related_name='reserved_parking_lots', through='jparks.Reservation', to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(related_name='reserved_parking_lots', through='jpark.Reservation', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AddField(
             model_name='parking',

@@ -4,7 +4,7 @@ from django import forms
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
-from jparks.models import Parking, Reservation, CustomUser
+from jpark.models import Parking, Reservation, CustomUser
 
 class LoginForm(Form):
     username = CharField(label="User Name", max_length=64)

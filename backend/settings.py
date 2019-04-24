@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from jparks.apps import JparkConfig
+from jpark.apps import JparkConfig
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,12 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'jparks',
+    'jpark',
     'djmoney',
 
 ]
 ...
-AUTH_USER_MODEL = 'jparks.CustomUser' 
+AUTH_USER_MODEL = 'jpark.CustomUser' 
 
 
 MIDDLEWARE = [

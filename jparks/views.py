@@ -5,11 +5,11 @@ from django.contrib.auth.models import User
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login, authenticate, update_session_auth_hash, logout
 from django.contrib import messages
-from jparks.models import  Category, Parking, Reservation
+from jpark.models import  Category, Parking, Reservation
 from django.http import HttpResponse, HttpResponseRedirect
 
 
-from jparks.forms import LoginForm, EditProfileForm, addSpotForm
+from jpark.forms import LoginForm, EditProfileForm, addSpotForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from rest_framework import viewsets
