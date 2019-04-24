@@ -14,7 +14,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class ParkingSerializer(serializers.ModelSerializer):
   class Meta:
    model = Parking
-   fields = ('owner', 'category', 'drivers', 'street_type', 'street_name', 'street_number', 'zip_code', 'province', 'city', 'image', 'phone', 'description', 'opening_time', 'closing_time', 'hourly_rate')
+   fields = ('owner', 'drivers', 'street_type', 'street_name', 'street_number', 'zip_code', 'province', 'city', 'image', 'phone', 'description', 'opening_time', 'closing_time', 'hourly_rate', 'lat', 'lng')
 
 class ReservationSerializer(serializers.ModelSerializer):
   class Meta:
