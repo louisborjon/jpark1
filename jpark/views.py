@@ -102,7 +102,7 @@ def edit_profile_view(request):
         if form.is_valid():
             form.save()
             user = form.instance
-            return redirect('/profile/{}'.format(user.profile.pk)) #will redirect to Profile page
+            return redirect('/profile/{}'.format(user.pk)) #will redirect to Profile page
     else:
         form = EditProfileForm(instance=request.user)
     args = {'form':form}
