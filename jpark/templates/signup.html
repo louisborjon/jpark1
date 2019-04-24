@@ -2,18 +2,18 @@
 
 {% block content %}
 <title>Jpark Sign Up</title>
-<h2> Sign Up!</h2>
+<h2 class="signup-title"> Sign Up!</h2>
 <form method="POST">
     {% csrf_token %}
     {% for field in form %}
-    <p> 
+    <p>
         {{ field.label_tag }}<br>
         {{ field }}
         {% if field.help_text %}
-            <small style="color : grey">{{ field.help_text }}</small>
+            <small style="color : white">{{ field.help_text }}</small>
         {% endif %}
     {% endfor %}
     </p>
-    <button type="submit">Sign Up</button>
+    <button class="button" type="submit">Sign Up</button>
 </form>
 {% endblock %}

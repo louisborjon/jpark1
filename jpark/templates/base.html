@@ -4,11 +4,15 @@
   <head>
     <meta charset="UTF-8">
     <title>JPark</title>
-    <link rel="stylesheet" type="text/css" href="static/main.css">
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cute+Font" rel="stylesheet">
   </head>
   <body>
     {% block content %}
     {% endblock %}
-
+    <img class="logo" src="{% static '/images/my_logo.png' %}" alt="" width="300" height="200">
   </body>
+  <footer>Copyright of JPark© and JLMV Programming</footer>
 </html>

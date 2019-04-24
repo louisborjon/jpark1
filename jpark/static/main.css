@@ -1,3 +1,168 @@
 body {
-  color: blue;
+  margin: 50px auto;
+	border-radius: 2px;
+	padding: 20px;
+	font-family: 'Noto Sans', sans-serif;
+  background-color: mediumaquamarine;
+  color: white;
+}
+h1 {
+	display: block;
+	text-align: center;
+	padding: 0;
+	margin: 0px 0px 20px 0px;
+	color: white;
+  text-transform: uppercase;
+  font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+h3 {
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+a:link, a:default, a:visited {
+  background-color: transparent;
+  display: block;
+  margin: 10px auto;
+  color: white;
+}
+
+.phone {
+  position: fixed;
+  right: 140px;
+  top: 60px;
+  max-height: 100%;
+  transform: rotate(10deg);
+}
+
+.parking-photo {
+  position: absolute;
+  clip: rect(60px, 420px, 300px, 90px);
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  margin-top: -90px;
+  margin-left: -250px;
+  height: 50%;
+}
+
+.creator-riff {
+  position: absolute;
+  font-family: 'Noto Sans', sans-serif;
+  text-align: center;
+  top: 82%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button {
+  display: block;
+  font: bold 16px 'Noto Sans';
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  padding: 6px 6px 6px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  width: 100px;
+  text-align: center;
+}
+
+.logo {
+  position: absolute;
+  left: -15px;
+  top: -15px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.login-title {
+  margin-top: 100px;
+}
+
+.signup-title {
+  margin-top: 100px;
+}
+
+.aboutus-title {
+  margin-top: 50px;
+}
+
+.aboutus-paragraph {
+  margin-left: 130px;
+  margin-right: 60px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.mainpage-buttons {
+  display: block;
+  font: bold 16px 'Noto Sans';
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  padding: 6px 6px 6px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.logout-button {
+  display: block;
+  font: bold 16px 'Noto Sans';
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  padding: 6px 6px 6px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  width: 100px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+#wrapper {width: 100%; margin: auto;}
+#left {float: left;}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+  padding: 1rem;
+  font-family: 'Cute Font', cursive;
+  font-size: 20px;
+  color: white;
+}
+
+
+
+@media screen and (max-width: 1000px) {
+  img {
+  display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+
 }
