@@ -96,7 +96,8 @@ def signup_view(request):
 
 #Profile Info Form
 def ProfileInfo_view(request):
-    pass
+    return render(request, 'profileinfo.html')
+
 
 
 
