@@ -31,15 +31,15 @@ export default class CustomModal extends Component {
     return (
       <Modal isOpen={true} toggle={toggle}>
         <ModalHeader toggle={toggle}>
-         Item </ModalHeader>
+         User </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
               <Label for="User">User</Label>
               <Input
                 type="text"
-                name="User"
-                value={this.state.activeItem.User}
+                name="user"
+                value={this.state.activeItem.user || ''}
                 onChange={this.handleChange}
                 placeholder="Enter Profile User"
               />
@@ -49,9 +49,59 @@ export default class CustomModal extends Component {
               <Input
                 type="text"
                 name="first_name"
-                value={this.state.activeItem.first_name}
+                value={this.state.activeItem.first_name || ''}
                 onChange={this.handleChange}
                 placeholder="Enter Profile first_name"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="last_name">last_name</Label>
+              <Input
+                type="text"
+                name="last_name"
+                value={this.state.activeItem.last_name || ''}
+                onChange={this.handleChange}
+                placeholder="Enter Profile last_name"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="licence_plate">licence_plate</Label>
+              <Input
+                type="text"
+                name="licence_plate"
+                value={this.state.activeItem.licence_plate || ''}
+                onChange={this.handleChange}
+                placeholder="Enter licence_plate"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="email">Email</Label>
+              <Input
+                type="text"
+                name="email"
+                value={this.state.activeItem.email || ''}
+                onChange={this.handleChange}
+                placeholder="Enter email"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="phone">Phone</Label>
+              <Input
+                type="text"
+                name="phone"
+                value={this.state.activeItem.phone || ''}
+                onChange={this.handleChange}
+                placeholder="Enter phone"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="balance">Balance</Label>
+              <Input
+                type="text"
+                name="balance"
+                value={this.state.activeItem.balance || ''}
+                onChange={this.handleChange}
+                placeholder="Enter balance"
               />
             </FormGroup>
             <FormGroup check>

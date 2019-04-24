@@ -10,6 +10,11 @@ class App extends Component {
      activeItem: {
        user: "",
        first_name: "",
+       last_name: "",
+       licence_plate: "",
+       email: "",
+       phone: "",
+       balance: "",
        completed: false
      },
      profileList: []
@@ -55,7 +60,7 @@ class App extends Component {
    );
    return newItems.map(item => (
      <li
-       key={item.id}
+       key={item.user}
        className="list-group-item d-flex justify-content-between align-items-center"
      >
        <span
@@ -64,7 +69,47 @@ class App extends Component {
          }`}
          user={item.first_name}
        >
-         {item.user}
+         {item.first_name}
+       </span>
+       <span
+         className={`profile-user mr-2 ${
+           this.state.viewCompleted ? "Completed-profile" : ""
+         }`}
+         user={item.last_name}
+       >
+         {item.last_name}
+       </span>
+       <span
+         className={`profile-user mr-2 ${
+           this.state.viewCompleted ? "Completed-profile" : ""
+         }`}
+         user={item.licence_plate}
+       >
+         {item.licence_plate}
+       </span>
+       <span
+         className={`profile-user mr-2 ${
+           this.state.viewCompleted ? "Completed-profile" : ""
+         }`}
+         user={item.email}
+       >
+         {item.email}
+       </span>
+       <span
+         className={`profile-user mr-2 ${
+           this.state.viewCompleted ? "Completed-profile" : ""
+         }`}
+         user={item.phone}
+       >
+         {item.phone}
+       </span>
+       <span
+         className={`profile-user mr-2 ${
+           this.state.viewCompleted ? "Completed-profile" : ""
+         }`}
+         user={item.balance}
+       >
+         {item.balance}
        </span>
        <span>
          <button
@@ -72,7 +117,7 @@ class App extends Component {
            className="btn btn-secondary mr-2"
          >
            {" "}
-           Edit{" "}
+           nose{" "}
          </button>
          <button
            onClick={() => this.handleDelete(item)}
@@ -96,16 +141,16 @@ class App extends Component {
      return;
    }
    axios
-     .post("/api/todos//", item)
+     .post("/api/todos/", item)
      .then(res => this.refreshList());
  };
  handleDelete = item => {
    axios
-     .delete(`/api/todos//${item.id}`)
+     .delete(`/api/todos/${item.id}`)
      .then(res => this.refreshList());
  };
  createItem = () => {
-   const item = { user: "", first_name: "", completed: false };
+   const item = { user: "", first_name: "", last_name: "", licence_plate: "", email: "", phone: "", balance: "", completed: false };
    this.setState({ activeItem: item, modal: !this.state.modal });
  };
  editItem = item => {
