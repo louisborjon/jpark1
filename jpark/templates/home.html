@@ -10,7 +10,7 @@
   <div id="wrapper">
   <div id="left">
     <a class="button" href="{% url 'logout' %}">Logout</a>
-    <a class="button" href="{% url 'profile' id=user.profile.pk %}">Profile</a>
+    <a class="button" href="{% url 'profile' id=user.pk %}">Profile</a>
     <a class="button" href="{% url 'about_us' %}">About Us</a>
   </div>
   </div>

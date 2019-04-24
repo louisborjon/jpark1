@@ -28,8 +28,8 @@ from .forms import CustomUserCreationForm
 
 
 class ProfileView(viewsets.ModelViewSet):
-  serializer_class = ProfileSerializer
-  queryset = CustomUser.objects.all()
+    serializer_class = ProfileSerializer
+    queryset = CustomUser.objects.all()
 
 #
 # class CategoryView(viewsets.ModelViewSet):
@@ -83,7 +83,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('/profileinfo/')
+            return redirect('/mainpage/')
     else:
         form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form':form})
@@ -94,12 +94,6 @@ def signup_view(request):
         #profile_form = ProfileForm(request.POST)
 
 
-#Profile Info Form
-def ProfileInfo_view(request):
-    return render(request, 'profileinfo.html')
-
-
-
 
 @login_required
 def edit_profile_view(request):
@@ -108,7 +102,7 @@ def edit_profile_view(request):
         if form.is_valid():
             form.save()
             user = form.instance
-            return redirect('/profile/{}'.format(user.profile.pk)) #will redirect to Profile page
+            return redirect('/profile/{}'.format(user.pk)) #will redirect to Profile page
     else:
         form = EditProfileForm(instance=request.user)
     args = {'form':form}
@@ -212,3 +206,6 @@ def delete(request):
     return render(request, 'deletespot.html')
 
 #make validation to check for plate number and phone number fields. if they don't prompt them to add those fields in order to add parking spot.
+def default_map(request):
+    mapbox_access_token = 'pk.my_mapbox_access_token'
+    return render(request, 'default.html', { 'mapbox_access_token': mapbox_access_token })   
