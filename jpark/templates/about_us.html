@@ -6,7 +6,13 @@
 <title>About Us</title>
 <h1 class="aboutus-title">About Us</h1>
 {% if user.is_authenticated %}
-    <a class="button" href="{% url 'profile' id=user.profile.pk %}">Return To Profile</a>
+<a class="button" href="{% url 'profile' id=user.pk %}">Return To Profile</a>
+<p class="aboutus-paragraph">Just Park was created using a mixture of black magic, blood, sweat and tears. Each of them used the knowledge
+  they gained from Bitmaker's Web Development Immersive Program to bring this beautiful little webthang to your eyes today.</p>
+
+
+<img class="parking-photo" src="{% static '/images/happy_parking-1024x683.jpg' %}" alt="">
+<p class="creator-riff"> The Creators - Josh Date, Luis Borjon, Michael Forgione and Vithuyan Sivananthan.</p>
 {% else %}
 <div id="wrapper">
 <div id="left">

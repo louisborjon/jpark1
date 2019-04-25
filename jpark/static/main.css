@@ -140,8 +140,62 @@ a:link, a:default, a:visited {
   margin-top: 40px;
 }
 
+.addparkingspot {
+  display: block;
+  font: bold 16px 'Noto Sans';
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  padding: 6px 6px 6px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  width: 100px;
+  text-align: center;
+}
+
+.profilelinks {
+  display: block;
+  font: bold 16px 'Noto Sans';
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  padding: 6px 6px 6px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  width: 100px;
+  text-align: center;
+}
+
+.parkingspaceline {
+  margin: 0px 110px 0px 0px;
+}
+
+.editprofileheadline {
+  margin: 100px 0px 0px 0px;
+}
+
+.changepasswordtitle {
+  margin: 40px 0px 0px 0px;
+}
+
+.welcomeblank {
+  margin: 50px 0px 0px 0px;
+}
+
+.addspottitle {
+  margin: 80px 0px 0px 0px;
+  text-align: center;
+}
+
+
 #wrapper {width: 100%; margin: auto;}
 #left {float: left;}
+#addspot {margin-top: 20px; float: left}
+#profileid {margin-top: 40px; float: left}
 
 footer {
   position: fixed;
@@ -165,8 +219,4 @@ footer {
 
 @media screen and (max-width: 400px) {
 
-}
-
-h1 {
-  color: red;
 }
