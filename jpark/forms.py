@@ -78,8 +78,8 @@ class ReservationForm(forms.ModelForm):
     parking_choices = []
     for parking in Parking.objects.all():
         parking_choices.append((parking.id, parking.full_address()))
-
-    Parking = forms.ChoiceField(choices= parking_choices, initial='', widget=forms.Select(), required=True)
+        Parking = forms.ChoiceField(choices= parking_choices, initial='', widget=forms.Select(), required=True)
+    
     class Meta():
         model = Reservation
         fields = (
