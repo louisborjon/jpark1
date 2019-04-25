@@ -4,10 +4,8 @@ from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import Permission , Group
 from django.contrib.auth.models import AbstractUser
-from mapbox import Geocoder
-
-geocoder = Geocoder(access_token="sk.eyJ1Ijoidml0aHV5YW4iLCJhIjoiY2p1dWI0b2ZtMDVkeDN5bXF5dmR5NWlzNyJ9.XytADzlzPvLuSXPI5vroJw")
 
 class CustomUser(AbstractUser):
     license_plate = models.CharField(max_length=255, null=True)
@@ -85,19 +83,18 @@ class Parking(models.Model):
     lat = models.FloatField()
     lng = models.FloatField()
 
-    def full_address(self):
-        return  f"{self.street_number} {self.street_name}, {self.city}, {self.zip_code}"
+    # @receiver(post_save, sender=Parking)
+    # def geo_from_address(sender, instance, created, **kwargs):
+    #     if created:
+    #         address = f"{instance.street_number} {instance.street_name}, {instance.city}, {instance.zip_code}"
+    #         response = geocoder.forward(address)
+    #         instance.lat = response["features"][0]["center"][0]
+    #         instance.lng = response["features"][0]["center"][1]
+    #         instance.save()
 
-    def geo_from_address(self):
-        response = geocoder.forward(self.full_address()).json()
-        self.lat = response["features"][0]["center"][0]
-        self.lng = response["features"][0]["center"][1]
-        print(f"Updating Lat/Lng: {self.lat}, {self.lng}", file=sys.stderr)
-        self.save()
 
-    @receiver(post_save, sender=owner)
-    def save_geo_cords(sender, instance, **kwargs):
-        instance.geo_from_address()
+    class Meta():
+        permissions = (("can_edit_parking", "User Can edit Parking"),)
 
     def __str__(self):
         return "Your parking spot is located at {} {} {}".format(self.street_number, self.street_name, self.street_type)
@@ -110,7 +107,7 @@ class Parking(models.Model):
         return (reserved_parking + starting_time) <= self.availability
 
 class Owner(models.Model):
-    pass    
+    pass
 
 class Reservation(models.Model):
     # for reservationes starting_date, ending_date, starting_time, ending_time, =total reservation time
