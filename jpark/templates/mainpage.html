@@ -2,49 +2,21 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<h1>Welcome {{user.first_name}}</h1>
-<div id="wrapper">
-<div id="left">
-  <a class="mainpage-buttons" href="{% url 'logout' %}">Logout</a>
-</div>
-</div>
-
-<h2>Reserve</h2>
-<div id="wrapper">
-<div id="left">
-  <a class="mainpage-buttons" href="{% url 'reservations' %}">Reserve a Spot</a>
-</div>
-</div>
-
-<h2>Profile Page</h2>
-<div id="wrapper">
+<h1 class="welcomeblank">Welcome {{user.first_name}}</h1>
 <div id="left">
   <a class="mainpage-buttons" href="{% url 'profile' id=user.pk %}">Profile</a>
-</div>
-</div>
-
-<h2>Search</h2>
-<div id="wrapper">
-<div id="left">
   <a class="mainpage-buttons" href="{% url 'search' %}">Search</a>
-</div>
-</div>
-
-<h2>Add/Delete A Spot</h2>
-<div id="wrapper">
-<div id="left">
   <a class="mainpage-buttons" href="{% url 'list'%}">Parking</a>
-</div>
+  <a class="mainpage-buttons" href="{% url 'reservations' %}">Reserve a Spot</a>
+  <a class="mainpage-buttons" href="{% url 'logout' %}">Logout</a>
 </div>
 
 {% else %}
 <div>
     <h2>You are not signed in. Please login or sign up</h2>
-    <div id="wrapper">
     <div id="left">
       <a class="mainpage-buttons" href="{% url 'login' %}">Sign In</a>
       <a class="mainpage-buttons" href="{% url 'signup' %}">Sign Up</a>
-    </div>
     </div>
 </div>
 {% endif %}

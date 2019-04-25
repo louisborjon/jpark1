@@ -2,13 +2,15 @@
 
 {% block content %}
 
-<h2>Hello {{ user.username }}</h2>
-    <h3>Your Currnet Balance is: {{ profile.balance  }}</h3>
-    <a href="{% url 'editprofile' %}"><button>Edit Your Profile</button></a>
-    <a href="{% url 'reservations'%}"><button>Make Reservations</button></a>
-    <a href="{% url 'mainpage'%}"><button>Home</button></a>
-    <h2>Parking Spaces Added:</h2>
-    {% for spot in parking %}
-        <h2> {{ spot }}</h2>
-    {% endfor %}
+<h1>Hello {{ user.first_name }}</h1>
+    <h3>Your Current Balance is: {{ profile.balance }}</h3>
+  <div id="profileid">
+    <a class="profilelinks" href="{% url 'editprofile' %}">Edit Your Profile</a>
+    <a class="profilelinks" href="{% url 'reservations'%}">Make Reservations</a>
+    <a class="profilelinks" href="{% url 'mainpage'%}">Home</a>
+  </div>
+  <h3>Parking Spaces Added:</h3>
+  {% for spot in parking %}
+      <h2> {{ spot }}</h2>
+  {% endfor %}
 {% endblock %}

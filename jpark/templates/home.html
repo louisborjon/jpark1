@@ -7,21 +7,17 @@
 <h3>Reserve that spot and 'Just Park!'</h3>
 
 {% if user.is_authenticated %}
-  <div id="wrapper">
   <div id="left">
     <a class="button" href="{% url 'logout' %}">Logout</a>
     <a class="button" href="{% url 'profile' id=user.pk %}">Profile</a>
     <a class="button" href="{% url 'about_us' %}">About Us</a>
   </div>
-  </div>
 <img class="phone" style="-webkit-user-select: none" src="https://www.mapbox.com/maps/streets/phone.png" width="300" height="630">
 {% else %}
-  <div id="wrapper">
   <div id="left">
     <a class="button" href="{% url 'login' %}">Login</a>
     <a class="button" href="{% url 'signup' %}">Sign Up</a>
     <a class="button" href="{% url 'about_us' %}">About Us</a>
-  </div>
   </div>
 <img class="phone" style="-webkit-user-select: none" src="https://www.mapbox.com/maps/streets/phone.png" width="300" height="630">
 {% endif %}

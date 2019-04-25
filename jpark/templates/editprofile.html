@@ -2,7 +2,7 @@
 
 {% block content %}
 <title>Jpark Profile</title>
-<h2> Edit Your Profile!</h2>
+<h2 class="editprofileheadline"> Edit Your Profile!</h2>
 <form method="POST">
     {% csrf_token %}
     {{form.as_p}}
