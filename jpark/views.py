@@ -157,10 +157,10 @@ def login_view(request):
 @login_required
 def profile_view(request, id):
     profile = CustomUser.objects.get(pk=id)
-    parking = Parking.objects.get(pk=id)
+    #parking = Parking.objects.get(pk=id)
     context = {
         'profile': profile,
-        'parking': parking
+        #'parking': parking
        # 'reservations':reservation
         }
 
