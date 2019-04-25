@@ -9,7 +9,7 @@ from jpark.models import  Category, Parking, Reservation
 from django.http import HttpResponse, HttpResponseRedirect
 
 
-from jpark.forms import LoginForm, EditProfileForm, addSpotForm
+from jpark.forms import LoginForm, EditProfileForm, addSpotForm, CustomUserCreationForm, CustomUserChangeForm, ReservationForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from rest_framework import viewsets
@@ -19,7 +19,6 @@ from .models import Category, Parking, Reservation, CustomUser
 from django.contrib.auth.decorators import permission_required, user_passes_test
 from django.urls import reverse_lazy
 from django.views import generic
-from .forms import CustomUserCreationForm
 
 
 
@@ -51,9 +50,7 @@ def starting_page(request):
 def root(request):
     return render(request, 'home.html')
 
-@login_required
-def reservations(request):
-    return render(request, 'reservations.html')
+
 
 @login_required
 def mainpage(request):
@@ -88,23 +85,16 @@ def signup_view(request):
         form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form':form})
 
-         #profile_form.save()
-          #  license_plate = form.cleaned_data.get('license_plate')
-           # phone_number = form.cleaned_data.get('phone_number')
-        #profile_form = ProfileForm(request.POST)
-
-
-
 @login_required
 def edit_profile_view(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             user = form.instance
             return redirect('/profile/{}'.format(user.pk)) #will redirect to Profile page
     else:
-        form = EditProfileForm(instance=request.user)
+        form = CustomUserChangeForm(instance=request.user)
     args = {'form':form}
     return render(request, 'editprofile.html', args)
 
@@ -157,7 +147,7 @@ def login_view(request):
 @login_required
 def profile_view(request, id):
     profile = CustomUser.objects.get(pk=id)
-    parking = Parking.objects.get(pk=id)
+    parking = Parking.objects.filter(owner=id)
     context = {
         'profile': profile,
         'parking': parking
@@ -166,8 +156,21 @@ def profile_view(request, id):
 
     return render(request, 'profile.html', context)
 
-def is_Owner(user):
-    return user.groups.filter(name='Owner').exists()
+@login_required
+def reservations(request):
+    if request.method == "POST":
+        form = ReservationForm(request.POST)
+        form.instance.owner = request.user
+        #form.instance.parking = request.parking
+        if form.is_valid():
+                reserve_form = form.save(commit=False)
+                reserve_form.save()
+                return redirect('/mainpage/')
+        else:
+            form = ReservationForm()
+    else: 
+        form = ReservationForm()
+    return render(request, 'reservations.html', {'form':form})
 
 
 @login_required
@@ -208,4 +211,4 @@ def delete(request):
 #make validation to check for plate number and phone number fields. if they don't prompt them to add those fields in order to add parking spot.
 def default_map(request):
     mapbox_access_token = 'pk.my_mapbox_access_token'
-    return render(request, 'default.html', { 'mapbox_access_token': mapbox_access_token })   
+    return render(request, 'default.html', { 'mapbox_access_token': mapbox_access_token })

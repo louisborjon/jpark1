@@ -82,8 +82,8 @@ class Parking(models.Model):
     opening_time = models.TimeField()
     closing_time = models.TimeField()
     hourly_rate = models.IntegerField()
-    lat = models.FloatField()
-    lng = models.FloatField()
+    #lat = models.FloatField()
+    #lng = models.FloatField()
 
     def full_address(self):
         return  f"{self.street_number} {self.street_name}, {self.city}, {self.zip_code}"

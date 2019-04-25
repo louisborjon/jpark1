@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-
-{% for spot in reservation %}
-    {{ reservation }}
-
-{% endfor %}
+<div id='asspull'>
+<h2> Reserve a Spot</h2>
+<form method="POST">
+    {% csrf_token %}
+    
+    {{ form.as_p }} 
+    <input  type="submit" value="Save Reservation">
+</form>
+</div>
 
 {% endblock %}

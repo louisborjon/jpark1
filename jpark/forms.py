@@ -43,6 +43,7 @@ class addSpotForm(forms.ModelForm):
             )
 
 
+
 class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
@@ -67,18 +68,22 @@ class EditProfileForm(UserChangeForm):
         'email')
 
 class ReservationForm(forms.ModelForm):
-    starting_date = forms.DateField()
-    ending_date = forms.DateField()
-    starting_time = forms.DateField()
-    ending_time = forms.DateField()
-    created_at = forms.DateField()
+    #starting_date = forms.DateField()
+    #ending_date = forms.DateField()
+    starting_time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
+    ending_time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
+    #created_at = forms.DateField()
     notes = forms.Textarea()
-    Parking = forms.CharField(max_length=121)
+
+    parking_choices = []
+    for parking in Parking.objects.all():
+        parking_choices.append((parking.id, parking.full_address()))
+
+    Parking = forms.ChoiceField(choices= parking_choices, initial='', widget=forms.Select(), required=True)
     class Meta():
         model = Reservation
         fields = (
             'Parking', 
-            'ending_date',
             'starting_time',
             'ending_time',
             'notes')
