@@ -19,7 +19,8 @@ if __name__ == '__main__':
     token = "sk.eyJ1Ijoidml0aHV5YW4iLCJhIjoiY2p1dWI0b2ZtMDVkeDN5bXF5dmR5NWlzNyJ9.XytADzlzPvLuSXPI5vroJw"
 
     # geocode
-    result = geocode(token, "100 king street west, toronto")
+    # result = geocode(token, "100 king street west, toronto")
+    result = geocode(token, "451 Bloor St. East, Toronto")
 
     # print result
     print(json.dumps(result, indent=2))

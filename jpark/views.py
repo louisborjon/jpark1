@@ -34,10 +34,10 @@ class ProfileView(viewsets.ModelViewSet):
 # class CategoryView(viewsets.ModelViewSet):
 #   serializer_class = CategorySerializer
 #   queryset = Category.objects.all()
-#
-# class ParkingView(viewsets.ModelViewSet):
-#   serializer_class = ParkingSerializer
-#   queryset = Parking.objects.all()
+
+class ParkingView(viewsets.ModelViewSet):
+  serializer_class = ParkingSerializer
+  queryset = Parking.objects.all()
 #
 # class ReservationView(viewsets.ModelViewSet):
 #   serializer_class = ReservationSerializer
@@ -198,7 +198,7 @@ def add(request):
                 return redirect('/mainpage/')
         else:
             form = addSpotForm()
-    else: 
+    else:
         form = addSpotForm()
     return render(request, 'addspot.html', {'form':form})
 
