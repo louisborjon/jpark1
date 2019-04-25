@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from .models import Category, Parking, Reservation, CustomUser
 
-# class ProfileSerializer(serializers.ModelSerializer):
-#   class Meta:
-#     model = CustomUser
-#     fields = ('id', 'first_name', 'last_name ', 'licence_plate', 'email', 'phone', 'balance')
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'first_name', 'last_name ', 'licence_plate', 'email', 'phone', 'balance')
 
 class CategorySerializer(serializers.ModelSerializer):
   class Meta:
