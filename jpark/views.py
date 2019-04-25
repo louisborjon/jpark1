@@ -35,10 +35,10 @@ class ProfileView(viewsets.ModelViewSet):
 # class CategoryView(viewsets.ModelViewSet):
 #   serializer_class = CategorySerializer
 #   queryset = Category.objects.all()
-#
-# class ParkingView(viewsets.ModelViewSet):
-#   serializer_class = ParkingSerializer
-#   queryset = Parking.objects.all()
+
+class ParkingView(viewsets.ModelViewSet):
+  serializer_class = ParkingSerializer
+  queryset = Parking.objects.all()
 #
 # class ReservationView(viewsets.ModelViewSet):
 #   serializer_class = ReservationSerializer
@@ -195,7 +195,7 @@ def add(request):
                 return redirect('/mainpage/')
         else:
             form = addSpotForm()
-    else: 
+    else:
         form = addSpotForm()
     return render(request, 'addspot.html', {'form':form})
 
@@ -208,4 +208,4 @@ def delete(request):
 #make validation to check for plate number and phone number fields. if they don't prompt them to add those fields in order to add parking spot.
 def default_map(request):
     mapbox_access_token = 'pk.my_mapbox_access_token'
-    return render(request, 'default.html', { 'mapbox_access_token': mapbox_access_token })   
+    return render(request, 'default.html', { 'mapbox_access_token': mapbox_access_token })

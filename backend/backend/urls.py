@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, url
 from jpark.views import signup_view, login_view, edit_profile_view, root, starting_page,mainpage, profile_view, change_password, user_logout, reservations, search, about_us_view, list_view, default_map
+from rest_framework import routers
+from jpark import views
 
+router = routers.DefaultRouter()
+router.register(r'todos', views.ProfileView, 'jpark')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('signup/', signup_view, name='signup'),
     path('home/ ', starting_page, name="home"),
     path('', root, name="root"),
@@ -36,5 +41,3 @@ urlpatterns = [
     path('list/', list_view, name="list"),
     url(r'', views.default_map, name="default"),
 ]
-
-
