@@ -148,10 +148,11 @@ def login_view(request):
 def profile_view(request, id):
     profile = CustomUser.objects.get(pk=id)
     parking = Parking.objects.filter(owner=id)
+    reservation = Reservation.objects.filter(parking=id)
     context = {
         'profile': profile,
-        'parking': parking
-       # 'reservations':reservation
+        'parking': parking,
+        'reservations':reservation
         }
 
     return render(request, 'profile.html', context)
@@ -160,8 +161,8 @@ def profile_view(request, id):
 def reservations(request):
     if request.method == "POST":
         form = ReservationForm(request.POST)
-        form.instance.owner = request.user
-        #form.instance.parking = request.parking
+        form.instance.User = request.user
+        #form.instance.parking = request.parking.id
         if form.is_valid():
                 reserve_form = form.save(commit=False)
                 reserve_form.save()

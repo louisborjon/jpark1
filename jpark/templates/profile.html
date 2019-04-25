@@ -3,14 +3,19 @@
 {% block content %}
 
 <h1>Hello {{ user.first_name }}</h1>
-    <h3>Your Current Balance is: {{ profile.balance }}</h3>
+    <h3>Your Current Balance is: {{ user.balance }}</h3>
   <div id="profileid">
     <a class="profilelinks" href="{% url 'editprofile' %}">Edit Your Profile</a>
     <a class="profilelinks" href="{% url 'reservations'%}">Make Reservations</a>
     <a class="profilelinks" href="{% url 'mainpage'%}">Home</a>
   </div>
-  <h3>Parking Spaces Added:</h3>
+<div id="profileinfoid">
+  <h3 class="parkingspacesadded">Parking Spaces Added:</h3>
   {% for spot in parking %}
-      <h2> {{ spot }}</h2>
+    <h2 class="parkingspacesadded">{{ spot }}</h2>
+  {% endfor %}
+  {% for myspot in reservations %}
+    <h2 class="parkingspacesadded">{{ myspot }}</h2>
+</div>
   {% endfor %}
 {% endblock %}

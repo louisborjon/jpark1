@@ -117,11 +117,11 @@ class Reservation(models.Model):
     User = models.ForeignKey(CustomUser, related_name='reservations_made', on_delete=models.CASCADE)
     parking = models.ForeignKey(Parking, related_name='reservations', on_delete=models.CASCADE)
     # checkout_same_day = ToggleField()
-    starting_date = models.DateField()
-    ending_date = models.DateField()
+    #starting_date = models.DateField()
+    #ending_date = models.DateField()
     starting_time = models.TimeField()
     ending_time = models.TimeField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    #created_at = models.DateTimeField(auto_now_add=True)
     notes = models.TextField(blank=True)
 
 
@@ -129,6 +129,9 @@ class Reservation(models.Model):
         #return "Your reservation is on {}".format(self.total_time).hour
 
         #return "Your remaining balance will be {}".format(self.user.profile.balance -(self.ending_time - self.starting_time) * self.parking.category.zone_price)
+
+    def __str__(self):
+        return f'Your Reservation is Confirmed!'
 
 
     def date_and_time(self):
