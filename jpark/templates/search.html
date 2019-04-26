@@ -27,7 +27,7 @@
         axios.get('/api/parking/')
             .then(function (response) {
                 let parking_spots = response.data
-
+                console.log(parking_spots)
                 parking_spots.forEach(function(parking_spot) {
                     console.log(parking_spot);
                     // create a DOM element for the marker

@@ -15,7 +15,7 @@ class ParkingSerializer(serializers.ModelSerializer):
   full_address = serializers.ReadOnlyField()
   class Meta:
     model = Parking
-    fields = ('owner', 'drivers', 'street_type', 'street_name', 'street_number', 'zip_code', 'province', 'city', 'image', 'phone', 'description', 'opening_time', 'closing_time', 'hourly_rate', 'lat', 'lng', 'full_address')
+    fields = ('owner', 'drivers', 'street_type', 'street_name', 'street_number', 'zip_code', 'province', 'city', 'image', 'phone', 'description', 'opening_time', 'closing_time', 'hourly_rate', 'full_address', 'lat', 'lng')
 
 
 class ReservationSerializer(serializers.ModelSerializer):

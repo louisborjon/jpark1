@@ -7,6 +7,11 @@ from django.dispatch import receiver
 from django.contrib.auth.models import Permission , Group
 from django.contrib.auth.models import AbstractUser
 
+from mapbox import Geocoder
+
+geocoder = Geocoder(access_token="sk.eyJ1Ijoidml0aHV5YW4iLCJhIjoiY2p1dWI0b2ZtMDVkeDN5bXF5dmR5NWlzNyJ9.XytADzlzPvLuSXPI5vroJw")
+
+
 class CustomUser(AbstractUser):
     license_plate = models.CharField(max_length=255, null=True)
     phone_number = models.CharField(max_length=255, null=True)
@@ -83,14 +88,16 @@ class Parking(models.Model):
     lat = models.FloatField()
     lng = models.FloatField()
 
-    # @receiver(post_save, sender=Parking)
-    # def geo_from_address(sender, instance, created, **kwargs):
-    #     if created:
-    #         address = f"{instance.street_number} {instance.street_name}, {instance.city}, {instance.zip_code}"
-    #         response = geocoder.forward(address)
-    #         instance.lat = response["features"][0]["center"][0]
-    #         instance.lng = response["features"][0]["center"][1]
-    #         instance.save()
+    def full_address(self):
+        return  f"{self.street_number} {self.street_name}, {self.city}, {self.zip_code}"
+
+    def geo_from_address(self):
+        print('Geocode');
+        response = geocoder.forward(self.full_address()).json()
+        self.lat = response["features"][0]["center"][0]
+        self.lng = response["features"][0]["center"][1]
+        print(f"Updating Lat/Lng: {self.lat}, {self.lng}")
+        self.save()
 
 
     class Meta():
@@ -105,6 +112,11 @@ class Parking(models.Model):
         reserved_parking = self.reservations.filter(date=date, starting_time=starting_time, ending_time=ending_time).aggregate(Sum('reserved_time'))
         reserved_parking = reserved_parking['reserved_time__sum'] or 0 #trying to not allow two reservations overlapping
         return (reserved_parking + starting_time) <= self.availability
+
+@receiver(post_save, sender=Parking)
+def save_geo_cords(sender, instance, created, **kwargs):
+    if created:
+        instance.geo_from_address()
 
 class Owner(models.Model):
     pass

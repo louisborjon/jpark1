@@ -6,7 +6,7 @@
 <title>About Us</title>
 <h1 class="aboutus-title">About Us</h1>
 {% if user.is_authenticated %}
-    <a class="button" href="{% url 'profile' id=user.profile.pk %}">Return To Profile</a>
+    <a class="button" href="{% url 'profile' id=user.pk %}">Return To Profile</a>
 {% else %}
 <div id="wrapper">
 <div id="left">
