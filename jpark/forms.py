@@ -68,18 +68,17 @@ class EditProfileForm(UserChangeForm):
         'email')
 
 class ReservationForm(forms.ModelForm):
-    #starting_date = forms.CharField(max_length=122)
-    #ending_date = forms.DateField()
     starting_time = forms.TimeField()
     ending_time = forms.TimeField()
-    #created_at = forms.DateField()
     notes = forms.Textarea()
-
+    parking = forms.ModelChoiceField(queryset=Parking.objects.all())
+    
+    #For future reference
     #parking_choices = []
     #for parking in Parking.objects.all():
         #parking_choices.append((parking.owner, parking.full_address()))
         #Parking = forms.ChoiceField(choices= Parking.objects.all().values_list('id', 'street_name'), initial='', widget=forms.Select(), required=True)
-    parking = forms.ModelChoiceField(queryset=Parking.objects.all())
+    
     class Meta():
         model = Reservation
         fields = (
