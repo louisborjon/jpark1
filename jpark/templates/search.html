@@ -27,9 +27,9 @@
         axios.get('/api/parking/')
             .then(function (response) {
                 let parking_spots = response.data
-
+                console.log(parking_spots)
                 parking_spots.forEach(function(parking_spot) {
-
+                    console.log(parking_spot);
                     // create a DOM element for the marker
                     var el = document.createElement('div');
                     el.className = 'marker';
@@ -38,12 +38,12 @@
                     el.style.backgroundImage = 'url(https://placekitten.com/g/20/)';
                     el.style.width = '20px';
                     el.style.height = '20px';
-                    
+
                     el.addEventListener('click', function() {
                         // TODO: Make this trigger something else in our UI
                         window.alert(parking_spot.description);
                     });
-                    
+
                     // add marker to map
                     new mapboxgl.Marker(el)
                         .setLngLat([parking_spot.lat, parking_spot.lng])
@@ -58,7 +58,7 @@
                 // always executed
             });
 
-       
+
 
     </script>
   </body>

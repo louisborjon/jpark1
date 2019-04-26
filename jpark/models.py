@@ -4,10 +4,13 @@ from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import Permission , Group
 from django.contrib.auth.models import AbstractUser
+
 from mapbox import Geocoder
 
 geocoder = Geocoder(access_token="sk.eyJ1Ijoidml0aHV5YW4iLCJhIjoiY2p1dWI0b2ZtMDVkeDN5bXF5dmR5NWlzNyJ9.XytADzlzPvLuSXPI5vroJw")
+
 
 class CustomUser(AbstractUser):
     license_plate = models.CharField(max_length=255, null=True)
@@ -89,15 +92,16 @@ class Parking(models.Model):
         return  f"{self.street_number} {self.street_name}, {self.city}, {self.zip_code}"
 
     def geo_from_address(self):
+        print('Geocode');
         response = geocoder.forward(self.full_address()).json()
         self.lat = response["features"][0]["center"][0]
         self.lng = response["features"][0]["center"][1]
-        print(f"Updating Lat/Lng: {self.lat}, {self.lng}", file=sys.stderr)
+        print(f"Updating Lat/Lng: {self.lat}, {self.lng}")
         self.save()
 
-    @receiver(post_save, sender=owner)
-    def save_geo_cords(sender, instance, **kwargs):
-        instance.geo_from_address()
+
+    class Meta():
+        permissions = (("can_edit_parking", "User Can edit Parking"),)
 
     def __str__(self):
         return "Your parking spot is located at {} {} {}".format(self.street_number, self.street_name, self.street_type)
@@ -109,8 +113,13 @@ class Parking(models.Model):
         reserved_parking = reserved_parking['reserved_time__sum'] or 0 #trying to not allow two reservations overlapping
         return (reserved_parking + starting_time) <= self.availability
 
+@receiver(post_save, sender=Parking)
+def save_geo_cords(sender, instance, created, **kwargs):
+    if created:
+        instance.geo_from_address()
+
 class Owner(models.Model):
-    pass    
+    pass
 
 class Reservation(models.Model):
     # for reservationes starting_date, ending_date, starting_time, ending_time, =total reservation time
